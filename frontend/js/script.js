@@ -278,6 +278,7 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
+const answers = [];
 
 function getCurrentQuestion() {
   return questions[currentQuestionIndex];
@@ -308,6 +309,28 @@ function startQuestionnaire() {
 
 function handleAnswerChange() {
   const selectedOption = assessmentForm.querySelector(
-    'input[name="question-1"]:checked',
+    'input[name="current-question"]:checked',
   );
+
+  const answer = {
+    questionId: getCurrentQuestion().id,
+    selectedOption: selectedOption.value,
+  };
+
+  let answerWasUpdated = false;
+  for (const savedAnswer of answers) {
+    if (savedAnswer.questionId === answer.questionId) {
+      savedAnswer.selectedOption = answer.selectedOption;
+
+      answerWasUpdated = true;
+      break;
+    }
+  }
+  if (answerWasUpdated === false) {
+    answers.push(answer);
+  }
+  setTimeout(function () {
+    currentQuestionIndex++;
+    renderCurrentQuestion();
+  }, 300);
 }
