@@ -2,31 +2,35 @@
 
 ## Dia
 
-1
+3
 
 ## Meta
 
-Definir a base do projeto e publicar a estrutura inicial no GitHub.
+Integrar o frontend do questionário com um backend Express.
 
 ## Feito
 
-- Repositório criado
-- Git inicializado
-- Repositório remoto conectado
-- Pastas frontend e backend criadas
-- README inicial criado
-- Definidas 30 perguntas na V1
-- Cada alternativa soma 1 ponto para apenas um perfil: D, I, S ou C
-- Em caso de maior pontuação empatada, o resultado apresentará os perfis empatados
+- Repositório criado e publicado no GitHub
+- Estrutura `frontend/` e `backend/` criada
+- Frontend com apresentação, questionário e resultado
+- 30 perguntas organizadas em JavaScript
+- Avanço automático após a seleção
+- Respostas guardadas sem duplicação
+- Progresso exibido de 1 a 30
+- Servidor Express criado
+- Rota `GET /health` testada
+- `.gitignore` criado para ignorar `node_modules` e `.DS_Store`
 
 ## Arquitetura
 
-- frontend/
-- backend/
+- `frontend/index.html`
+- `frontend/js/script.js`
+- `backend/server.js`
+- `backend/package.json`
 
-## Bloqueio
+## Rotas
 
-Nenhum
+- `GET /health`
 
 ## Decisões
 
@@ -34,10 +38,27 @@ Nenhum
 - Peso por alternativa: 1 ponto
 - Perfis possíveis: D, I, S e C
 - Empate: apresentar todos os perfis com a maior pontuação
-- Fonte das perguntas: conteúdo do projeto anterior, com nova implementação manual
+- Avanço automático após a seleção
+- Se uma pergunta for respondida novamente, substituir a resposta anterior
+- Frontend envia `questionId` e `selectedOption`
+- Backend será responsável pela pontuação
+- Fonte das perguntas: projeto anterior, com nova implementação manual
+
+## Testes
+
+- Seleção única entre quatro alternativas
+- Renderização de perguntas diferentes
+- Limpeza da seleção ao avançar
+- Resposta repetida substitui a anterior
+- Quantidade de respostas igual à quantidade de perguntas
+- `GET /health` devolve JSON com sucesso
+
+## Bloqueio
+
+Nenhum
 
 ---
 
 ## Próximo MP
 
-Criar a estrutura semântica inicial da página no frontend.
+Criar o endpoint `POST /api/assessment/calculate` com resposta simulada.
