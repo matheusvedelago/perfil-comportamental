@@ -4,6 +4,7 @@ const resultSection = document.getElementById("result");
 const startButton = document.getElementById("start-button");
 const assessmentForm = document.getElementById("assessment-form");
 const resultMessage = document.getElementById("result-message");
+const progressText = document.getElementById("progress-text");
 
 const questions = [
   {
@@ -337,6 +338,7 @@ function handleAnswerChange() {
       resultSection.hidden = false;
       resultMessage.textContent = "Respostas registadas com sucesso.";
     } else {
+      progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
       renderCurrentQuestion();
     }
   }, 300);
