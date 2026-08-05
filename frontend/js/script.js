@@ -3,6 +3,7 @@ const questionnaireSection = document.getElementById("questionnaire");
 const resultSection = document.getElementById("result");
 const startButton = document.getElementById("start-button");
 const assessmentForm = document.getElementById("assessment-form");
+const resultMessage = document.getElementById("result-message");
 
 const questions = [
   {
@@ -331,6 +332,12 @@ function handleAnswerChange() {
   }
   setTimeout(function () {
     currentQuestionIndex++;
-    renderCurrentQuestion();
+    if (currentQuestionIndex >= questions.length) {
+      questionnaireSection.hidden = true;
+      resultSection.hidden = false;
+      resultMessage.textContent = "Respostas registadas com sucesso.";
+    } else {
+      renderCurrentQuestion();
+    }
   }, 300);
 }
