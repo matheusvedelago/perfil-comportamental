@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
-const EXPECTED_ANSWERS_COUNT = 1;
+const EXPECTED_ANSWERS_COUNT = 30;
 const VALID_QUESTION_IDS = Array.from(
   {
     length: EXPECTED_ANSWERS_COUNT,
@@ -74,6 +74,7 @@ app.post("/api/assessment/calculate", function (req, res) {
     });
   }
 
+  const receivedQuestionIds = [];
   for (const receivedAnswer of answers) {
     if (
       typeof receivedAnswer.questionId !== "string" ||
@@ -110,6 +111,19 @@ app.post("/api/assessment/calculate", function (req, res) {
         },
       });
     }
+
+    if (receivedQuestionIds.includes(receivedAnswer.questionId)) {
+      return res.status(400).json({
+        ok: false,
+        data: null,
+        error: {
+          code: "QUESTION_ID_DUPLICATED",
+          message: "O campo questionId está duplicado.",
+        },
+      });
+    }
+
+    receivedQuestionIds.push(receivedAnswer.questionId);
   }
 
   return res.json({
