@@ -133,6 +133,22 @@ app.post("/api/assessment/calculate", function (req, res) {
   const receivedQuestionIds = [];
   for (const receivedAnswer of answers) {
     if (
+      typeof receivedAnswer !== "object" ||
+      receivedAnswer === null ||
+      Array.isArray(receivedAnswer)
+    ) {
+      return res.status(400).json({
+        ok: false,
+        data: null,
+        error: {
+          code: "ANSWER_MUST_BE_OBJECT",
+          message:
+            "Cada resposta deve ser um objeto válido, e não pode ser null ou array.",
+        },
+      });
+    }
+
+    if (
       typeof receivedAnswer.questionId !== "string" ||
       typeof receivedAnswer.selectedOption !== "string"
     ) {
@@ -201,8 +217,29 @@ app.post("/api/assessment/calculate", function (req, res) {
     ok: true,
     data: {
       percentages: percentages,
-      summary: "string",
     },
     error: null,
+  });
+});
+
+app.use(function (error, req, res, next) {
+  if (error instanceof SyntaxError && error.status === 400 && "body" in error) {
+    return res.status(400).json({
+      ok: false,
+      data: null,
+      error: {
+        code: "INVALID_JSON",
+        message: "O corpo da requisição contém JSON inválido.",
+      },
+    });
+  }
+
+  return res.status(500).json({
+    ok: false,
+    data: null,
+    error: {
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Ocorreu um erro interno no servidor.",
+    },
   });
 });
