@@ -1,0 +1,203 @@
+:root {
+  --background: #061321;
+  --surface: #0d1d30;
+  --surface-light: #142942;
+  --border: #29415c;
+
+  --text: #f3f0e9;
+  --text-muted: #b5bec9;
+
+  --accent: #d2ad63;
+  --focus: #74a4d3;
+
+  --radius-large: 24px;
+  --radius-medium: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 16px;
+
+  background:
+    radial-gradient(circle at top, #10273e 0, transparent 38%),
+    var(--background);
+
+  color: var(--text);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.5;
+}
+
+header,
+main,
+footer {
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.05;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+main section {
+  padding: clamp(24px, 5vw, 44px);
+
+  background: linear-gradient(
+    145deg,
+    rgba(20, 41, 66, 0.96),
+    rgba(9, 25, 43, 0.96)
+  );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+footer {
+  margin-top: 24px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+#result-chart {
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto 0;
+}
+
+.chart-bars {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+  height: 280px;
+  border-bottom: 1px solid #333;
+}
+
+.bar-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.bar-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 2px;
+}
+
+.percentage-label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  font-weight: bold;
+}
+
+.profile-bar {
+  width: min(70%, 90px);
+  height: 100%;
+  min-height: 2px;
+  border-radius: 8px 8px 0 0;
+}
+
+.profile-bar.D {
+  background-color: red;
+}
+
+.profile-bar.I {
+  background-color: goldenrod;
+}
+
+.profile-bar.S {
+  background-color: green;
+}
+
+.profile-bar.C {
+  background-color: blue;
+}
+
+.chart-labels {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.profile-name {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.threshold-line {
+  position: absolute;
+  right: 0;
+  bottom: 30%;
+  left: 0;
+  z-index: 2;
+  border-top: 2px dashed #555;
+  pointer-events: none;
+}
+
+.bar-group.highlighted .profile-bar {
+  outline: 4px solid currentColor;
+  outline-offset: 3px;
+}
+
+.profile-name.highlighted {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 600px) {
+  .chart-bars {
+    gap: 8px;
+    height: 220px;
+  }
+
+  .chart-labels {
+    gap: 8px;
+  }
+
+  .profile-bar {
+    width: 70%;
+  }
+
+  .profile-name {
+    font-size: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+
+  .percentage-label {
+    font-size: 0.8rem;
+  }
+}

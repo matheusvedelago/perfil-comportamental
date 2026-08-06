@@ -5,6 +5,7 @@ const startButton = document.getElementById("start-button");
 const assessmentForm = document.getElementById("assessment-form");
 const resultMessage = document.getElementById("result-message");
 const progressText = document.getElementById("progress-text");
+const resultChart = document.getElementById("result-chart");
 
 const questions = [
   {
@@ -336,10 +337,97 @@ function handleAnswerChange() {
     if (currentQuestionIndex >= questions.length) {
       questionnaireSection.hidden = true;
       resultSection.hidden = false;
-      resultMessage.textContent = "Respostas registadas com sucesso.";
+      submitAssessment();
     } else {
       progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
       renderCurrentQuestion();
     }
   }, 300);
+}
+
+async function submitAssessment() {
+  const apiUrl = "http://localhost:3000/api/assessment/calculate";
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      answers: answers,
+    }),
+  };
+
+  const response = await fetch(apiUrl, requestOptions);
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    resultMessage.textContent = responseData.error.message;
+    return;
+  }
+
+  const responsePercentages = responseData.data.percentages;
+  console.log(responsePercentages);
+
+  renderChart(responsePercentages);
+}
+
+function renderChart(percentages) {
+  resultChart.innerHTML = "";
+
+  const profiles = ["D", "I", "S", "C"];
+
+  const profileNames = {
+    D: "Dominância",
+    I: "Influência",
+    S: "Estabilidade",
+    C: "Conformidade",
+  };
+
+  const chartBars = document.createElement("div");
+  chartBars.classList.add("chart-bars");
+
+  const chartLabels = document.createElement("div");
+  chartLabels.classList.add("chart-labels");
+
+  const thresholdLine = document.createElement("div");
+  thresholdLine.classList.add("threshold-line");
+
+  chartBars.appendChild(thresholdLine);
+
+  for (const profile of profiles) {
+    const percentageProfile = percentages[profile];
+
+    const barArea = document.createElement("div");
+    barArea.classList.add("bar-area");
+
+    const barGroup = document.createElement("div");
+    barGroup.classList.add("bar-group");
+    barGroup.style.height = `${percentageProfile}%`;
+
+    const percentageLabel = document.createElement("span");
+    percentageLabel.classList.add("percentage-label");
+    percentageLabel.textContent = `${percentageProfile}%`;
+
+    const profileBar = document.createElement("div");
+    profileBar.classList.add("profile-bar", profile);
+
+    const profileName = document.createElement("span");
+    profileName.classList.add("profile-name");
+    profileName.textContent = profileNames[profile];
+
+    if (percentageProfile >= 30) {
+      barGroup.classList.add("highlighted");
+      profileName.classList.add("highlighted");
+    }
+
+    barGroup.appendChild(percentageLabel);
+    barGroup.appendChild(profileBar);
+
+    barArea.appendChild(barGroup);
+
+    chartBars.appendChild(barArea);
+    chartLabels.appendChild(profileName);
+  }
+
+  resultChart.appendChild(chartBars);
+  resultChart.appendChild(chartLabels);
 }
