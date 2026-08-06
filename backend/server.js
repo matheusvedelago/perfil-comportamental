@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
@@ -16,6 +17,14 @@ const VALID_QUESTION_IDS = Array.from(
 const VALID_OPTIONS = ["A", "B", "C", "D"];
 
 app.use(express.json());
+
+const allowedOrigins = ["http://127.0.0.1:5500", "http://localhost:5500"];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  }),
+);
 
 app.listen(PORT, function () {
   console.log("Servidor a correr na porta ", PORT);
