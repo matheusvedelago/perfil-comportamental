@@ -6,6 +6,8 @@ const assessmentForm = document.getElementById("assessment-form");
 const resultMessage = document.getElementById("result-message");
 const progressText = document.getElementById("progress-text");
 const resultChart = document.getElementById("result-chart");
+const progressBar = document.getElementById("progress-bar");
+const loadingMessage = document.getElementById("loading-message");
 
 const questions = [
   {
@@ -291,6 +293,9 @@ function renderCurrentQuestion() {
   assessmentForm.reset();
 
   const currentQuestion = getCurrentQuestion();
+  const progressPercentage =
+    ((currentQuestionIndex + 1) / questions.length) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
 
   for (const option of currentQuestion.options) {
     const optionInput = assessmentForm.querySelector(
@@ -346,6 +351,8 @@ function handleAnswerChange() {
 }
 
 async function submitAssessment() {
+  loadingMessage.hidden = false;
+
   const apiUrl = "http://localhost:3000/api/assessment/calculate";
 
   const requestOptions = {
@@ -356,18 +363,25 @@ async function submitAssessment() {
     }),
   };
 
-  const response = await fetch(apiUrl, requestOptions);
-  const responseData = await response.json();
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+    const responseData = await response.json();
 
-  if (!response.ok) {
-    resultMessage.textContent = responseData.error.message;
-    return;
+    if (!response.ok) {
+      resultMessage.textContent = responseData.error.message;
+      return;
+    }
+
+    const responsePercentages = responseData.data.percentages;
+    console.log(responsePercentages);
+
+    renderChart(responsePercentages);
+  } catch {
+    resultMessage.innerText =
+      "Não foi possível conectar ao servidor. Tente novamente em instantes.";
+  } finally {
+    loadingMessage.hidden = true;
   }
-
-  const responsePercentages = responseData.data.percentages;
-  console.log(responsePercentages);
-
-  renderChart(responsePercentages);
 }
 
 function renderChart(percentages) {

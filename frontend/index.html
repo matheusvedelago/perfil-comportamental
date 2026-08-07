@@ -10,21 +10,36 @@
 
   <body>
     <header>
-      <h1>Perfil Comportamental</h1>
+      <h1>Descubra suas Tendências Comportamentais</h1>
+      <p class="subtitle">
+        Questionário educacional inspirado no <span>modelo DISC.</span>
+      </p>
+      <p>Dominância • Influência • Estabilidade • Conformidade</p>
     </header>
 
     <main>
       <section id="intro">
-        <h2>Apresentação</h2>
-        <p>Este é um questionário educacional, composto por 30 perguntas.</p>
+        <h2>Instruções Gerais</h2>
+        <p>
+          Este questionário é composto por 30 perguntas e leva entre 4 e 6
+          minutos para ser respondido.
+        </p>
+        <p>
+          ⚠️ RESPONDA com base em
+          <span>como age na maior parte do tempo hoje.</span> Não tente imaginar
+          o que seria ideal ou o que esperam de si. Seja sincero com o seu
+          comportamento natural.
+        </p>
         <p>Clique no botão abaixo para iniciar.</p>
         <button id="start-button" type="button">Iniciar questionário</button>
       </section>
 
       <section id="questionnaire" hidden>
-        <h2>Questionário</h2>
-
         <p id="progress-text">Pergunta 1 de 30</p>
+
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
 
         <form id="assessment-form">
           <fieldset data-question-id="Q1">
@@ -54,9 +69,11 @@
       </section>
 
       <section id="result" hidden>
-        <h2>Resultado</h2>
+        <h2>O seu perfil em números:</h2>
         <p id="result-message"></p>
         <div id="result-chart"></div>
+
+        <div id="loading-message" hidden>Calculando seu resultado...</div>
       </section>
     </main>
 
