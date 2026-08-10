@@ -1,9 +1,120 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-PT">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="icon" type="imagem/png" href="./favicon.png" />
   </head>
-  <body></body>
+  <body>
+    <header id="header">
+      <h1>Informações Gerais</h1>
+      <p>Descrição das informações gerais</p>
+      <button id="startQuestionnaire">Iniciar Questionário</button>
+    </header>
+
+    <main id="main">
+      <section id="questionnaire" hidden>
+        <p id="progressText">Pergunta 1 de 30</p>
+        <div id="progressBar"></div>
+        <p class="messageQuestionnaire">
+          Escolha a palavra que mais lhe define:
+        </p>
+        <label>
+          <input type="radio" name="currentQuestion" value="A" />
+          <span id="valueA"></span>
+        </label>
+        <label>
+          <input type="radio" name="currentQuestion" value="B" />
+          <span id="valueB"></span>
+        </label>
+        <label>
+          <input type="radio" name="currentQuestion" value="C" />
+          <span id="valueC"></span>
+        </label>
+        <label>
+          <input type="radio" name="currentQuestion" value="D" />
+          <span id="valueD"></span>
+        </label>
+      </section>
+
+      <section id="resultChart" hidden>
+        <div id="chartArea">
+          <div id="chartProfileD">
+            <span class="chartBarPercentage"></span>
+            <div class="chartBar"></div>
+            <p class="profileName">Dominância</p>
+          </div>
+
+          <div id="chartProfileI">
+            <span class="chartBarPercentage"></span>
+            <div class="chartBar"></div>
+            <p class="profileName">Influência</p>
+          </div>
+
+          <div id="chartProfileS">
+            <span class="chartBarPercentage"></span>
+            <div class="chartBar"></div>
+            <p class="profileName">eStabilidade</p>
+          </div>
+
+          <div id="chartProfileC">
+            <span class="chartBarPercentage"></span>
+            <div class="chartBar"></div>
+            <p class="profileName">Conformidade</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultTextProfile" hidden>
+        <h2 id="profileName"></h2>
+
+        <h3>Possíveis pensamentos fortalecedores</h3>
+        <p id="positiveThink"></p>
+
+        <h3>Possíveis pensamentos limitantes</h3>
+        <p id="negativeThink"></p>
+
+        <h3>Objetivos que potencializam seu perfil</h3>
+        <p id="objectives"></p>
+        <span
+          >Selecione 1 ou 2 objetivos para desenvolver nos próximos 12
+          meses.</span
+        >
+
+        <h3>Idéias para auxiliar o alcance de objetivos</h3>
+        <p id="insights"></p>
+      </section>
+
+      <section id="resultProfileError" hidden>
+        <h3>Atenção — Perfil com Pouco Destaque</h3>
+
+        <p>
+          Como nenhum perfil atingiu 30% ou mais, não é possível traçar um
+          perfil com destaque suficiente.
+        </p>
+
+        <p>
+          Este tipo de resultado geralmente é ocasionado por:<br />
+          <span
+            >- respostas buscando mais valores ou idealizações do que
+            propriamente ações mais recentes;<br />
+            - um momento de muito estresse;<br />
+            - baixo autoconhecimento;</span
+          ><br />
+        </p>
+
+        <p>
+          Recomendação:<br />
+          Refaça o teste com atenção às ações mais recentes e, em caso de
+          reincidência, peça para alguém próximo, que resposda pensando em como
+          você age no cotidiano.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Disclaimer</p>
+    </footer>
+  </body>
 </html>
