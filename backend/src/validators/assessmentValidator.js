@@ -1,4 +1,6 @@
 const { totalQuestionCount } = require("../config/assessmentConfig");
+const { validQuestionIds } = require("../config/assessmentConfig");
+const { validSelectedOptions } = require("../config/assessmentConfig");
 
 const assessmentValidation = function (body) {
   if (!body) {
@@ -66,6 +68,77 @@ const assessmentValidation = function (body) {
       },
     };
   }
+
+  function hasExactProperties(data) {
+    const hasQuestionId = Object.hasOwn(data, "questionId");
+    const hasSelectedOption = Object.hasOwn(data, "selectedOption");
+    const hasExactlyTwoProperties = Object.keys(data).length === 2;
+
+    return hasQuestionId && hasSelectedOption && hasExactlyTwoProperties;
+  }
+  const everyItemHasExactProperties = body.answers.every(hasExactProperties);
+  if (!everyItemHasExactProperties) {
+    return {
+      valid: false,
+      error: {
+        code: "INVALID_ANSWER_PROPERTIES",
+        message:
+          "Cada item de answers deve conter apenas questionId e selectedOption",
+      },
+    };
+  }
+
+  function hasStringProperties(data) {
+    return (
+      typeof data.questionId === "string" &&
+      typeof data.selectedOption === "string"
+    );
+  }
+
+  const everyItemHasStringProperties = body.answers.every(hasStringProperties);
+  if (!everyItemHasStringProperties) {
+    return {
+      valid: false,
+      error: {
+        code: "INVALID_ANSWER_PROPERTY_TYPE",
+        message: "questionId e selectedOption devem ser string",
+      },
+    };
+  }
+
+  function hasValidQuestionId(data) {
+    return validQuestionIds.includes(data.questionId);
+  }
+
+  const everyQuestionIdIsValid = body.answers.every(hasValidQuestionId);
+
+  if (!everyQuestionIdIsValid) {
+    return {
+      valid: false,
+      error: {
+        code: "INVALID_QUESTION_ID",
+        message: "questionId contém um identificador inválido",
+      },
+    };
+  }
+
+  function hasValidSelectedOption(data) {
+    return validSelectedOptions.includes(data.selectedOption);
+  }
+
+  const everySelectedOptionIsValid = body.answers.every(hasValidSelectedOption);
+
+  if (!everySelectedOptionIsValid) {
+    return {
+      valid: false,
+      error: {
+        code: "INVALID_SELECTED_OPTION",
+        message: "selectedOption contém uma opção inválida",
+      },
+    };
+  }
+
+  validQuestionIds;
 
   return {
     valid: true,
