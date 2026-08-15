@@ -1,4 +1,5 @@
 const { assessmentValidation } = require("../validators/assessmentValidator");
+const { calculateAssessment } = require("../calculations/assessmentCalculator");
 
 const handleAssessmentCalculation = function (req, res) {
   const dataValidation = assessmentValidation(req.body);
@@ -13,6 +14,7 @@ const handleAssessmentCalculation = function (req, res) {
       },
     });
   }
+  calculateAssessment(req.body.answers);
 };
 
 module.exports = {

@@ -138,7 +138,31 @@ const assessmentValidation = function (body) {
     };
   }
 
-  validQuestionIds;
+  function verifyDuplicateQuestionId(answers) {
+    const foundQuestionIds = [];
+
+    for (let index = 0; index < answers.length; index++) {
+      const questionId = answers[index].questionId;
+
+      if (foundQuestionIds.includes(questionId)) {
+        return false;
+      }
+      foundQuestionIds.push(questionId);
+    }
+    return true;
+  }
+
+  const questionIdIsNotDuplicate = verifyDuplicateQuestionId(body.answers);
+
+  if (!questionIdIsNotDuplicate) {
+    return {
+      valid: false,
+      error: {
+        code: "QUESTION_ID_DUPLICATED",
+        message: "questionId não pode ser duplicado",
+      },
+    };
+  }
 
   return {
     valid: true,
