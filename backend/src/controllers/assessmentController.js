@@ -14,7 +14,14 @@ const handleAssessmentCalculation = function (req, res) {
       },
     });
   }
-  calculateAssessment(req.body.answers);
+
+  const assessmentResult = calculateAssessment(req.body.answers);
+
+  return res.status(200).json({
+    ok: true,
+    data: assessmentResult,
+    error: null,
+  });
 };
 
 module.exports = {

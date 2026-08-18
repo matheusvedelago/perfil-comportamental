@@ -1,4 +1,6 @@
 const { scoringRules } = require("../data/scoringRules");
+const { profileSummaries } = require("../data/profileSummaries");
+const { profileContents } = require("../data/profileContents");
 
 const createDiscValues = function (answers) {
   const discValue = answers.map(function (answer) {
@@ -52,14 +54,50 @@ const findHighlightProfiles = function (percentages) {
   return highlightProfiles;
 };
 
+const createProfileKey = function (highlightProfiles) {
+  const discOrder = ["D", "I", "S", "C"];
+
+  const normalizedProfiles = discOrder.filter(function (disc) {
+    return highlightProfiles.includes(disc);
+  });
+
+  if (normalizedProfiles.length === 0) {
+    return null;
+  }
+
+  return normalizedProfiles.join("");
+};
+
+const createProfileContent = function (highlightProfiles) {
+  const profileContent = {};
+  for (const profile of highlightProfiles) {
+    profileContent[profile] = profileContents[profile];
+  }
+
+  return profileContent;
+};
+
 const calculateAssessment = function (answers) {
   const discValue = createDiscValues(answers);
   const scores = calculateScores(discValue);
   const percentages = calculatePercentages(scores);
   const highlightProfiles = findHighlightProfiles(percentages);
+  const profileKey = createProfileKey(highlightProfiles);
+  if (profileKey === null) {
+    return {
+      percentages: percentages,
+      profileSummary: null,
+      profileContent: null,
+    };
+  }
+
+  const profileSummary = profileSummaries[profileKey];
+  const profileContent = createProfileContent(highlightProfiles);
+
   return {
     percentages: percentages,
-    highlightProfiles: highlightProfiles,
+    profileSummary: profileSummary,
+    profileContent: profileContent,
   };
 };
 
