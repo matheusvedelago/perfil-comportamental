@@ -6,115 +6,174 @@
     <title>Document</title>
     <link rel="icon" type="imagem/png" href="./favicon.png" />
   </head>
+
   <body>
     <header id="header">
-      <h1>Informações Gerais</h1>
-      <p>Descrição das informações gerais</p>
-      <button id="startQuestionnaire">Iniciar Questionário</button>
+      <h1>Descubra suas Tendências Comportamentais</h1>
+      <p class="subtitle">
+        Questionário educacional inspirado no <span>modelo DISC.</span>
+      </p>
+      <p>Dominância • Influência • Estabilidade • Conformidade</p>
     </header>
 
-    <main id="main">
-      <section id="questionnaire" hidden>
-        <p id="progressText">Pergunta 1 de 30</p>
-        <div id="progressBar"></div>
-        <p class="messageQuestionnaire">
-          Escolha a palavra que mais lhe define:
+    <main>
+      <section id="intro">
+        <h2>Informações Gerais</h2>
+        <p>
+          Este questionário é composto por 30 perguntas e leva entre 4 e 6
+          minutos para ser respondido.
         </p>
-        <label>
-          <input type="radio" name="currentQuestion" value="A" />
-          <span id="valueA"></span>
-        </label>
-        <label>
-          <input type="radio" name="currentQuestion" value="B" />
-          <span id="valueB"></span>
-        </label>
-        <label>
-          <input type="radio" name="currentQuestion" value="C" />
-          <span id="valueC"></span>
-        </label>
-        <label>
-          <input type="radio" name="currentQuestion" value="D" />
-          <span id="valueD"></span>
-        </label>
+        <p>
+          ⚠️ RESPONDA com base em
+          <span>como age na maior parte do tempo hoje.</span> Não tente imaginar
+          o que seria ideal ou o que esperam de si. Seja sincero com o seu
+          comportamento natural.
+        </p>
+        <p>Clique no botão abaixo para iniciar.</p>
+        <button id="start-questionnaire" type="button">
+          Iniciar Questionário
+        </button>
       </section>
 
-      <section id="resultChart" hidden>
-        <div id="chartArea">
-          <div id="chartProfileD">
-            <span class="chartBarPercentage"></span>
-            <div class="chartBar"></div>
-            <p class="profileName">Dominância</p>
+      <section id="questionnaire" hidden>
+        <p id="progress-text">Pergunta 1 de 30</p>
+
+        <div class="progress-track">
+          <div id="progress-bar"></div>
+        </div>
+
+        <form id="assessment-form">
+          <fieldset data-question-id="Q1">
+            <legend>Escolha a palavra ou expressão que melhor o define:</legend>
+
+            <label>
+              <input type="radio" name="current-question" value="A" />
+              <span data-option-id="A">Respeitador</span>
+            </label>
+
+            <label>
+              <input type="radio" name="current-question" value="B" />
+              <span data-option-id="B">Competitivo</span>
+            </label>
+
+            <label>
+              <input type="radio" name="current-question" value="C" />
+              <span data-option-id="C">Racional</span>
+            </label>
+
+            <label>
+              <input type="radio" name="current-question" value="D" />
+              <span data-option-id="D">Motivador</span>
+            </label>
+          </fieldset>
+        </form>
+      </section>
+
+      <section id="result" hidden>
+        <div id="profile-result-chart">
+          <h2>O seu perfil em números:</h2>
+          <p id="result-message"></p>
+          <div id="chart-area">
+            <div id="chart-profile-d">
+              <span class="chart-bar-percentage"></span>
+              <div class="chart-bar"></div>
+              <p class="profile-name">Dominância</p>
+            </div>
+
+            <div id="chart-profile-i">
+              <span class="chart-bar-percentage"></span>
+              <div class="chart-bar"></div>
+              <p class="profile-name">Influência</p>
+            </div>
+
+            <div id="chart-profile-s">
+              <span class="chart-bar-percentage"></span>
+              <div class="chart-bar"></div>
+              <p class="profile-name">Estabilidade</p>
+            </div>
+
+            <div id="chart-profile-c">
+              <span class="chart-bar-percentage"></span>
+              <div class="chart-bar"></div>
+              <p class="profile-name">Conformidade</p>
+            </div>
           </div>
 
-          <div id="chartProfileI">
-            <span class="chartBarPercentage"></span>
-            <div class="chartBar"></div>
-            <p class="profileName">Influência</p>
+          <div id="loading-message" hidden>Calculando seu resultado...</div>
+        </div>
+
+        <div id="profile-summary">
+          <h2 id="profile-name"></h2>
+
+          <h3>Visão Geral</h3>
+          <p id="overview"></p>
+
+          <h3>Nota de Integração</h3>
+          <ul id="integration-notes"></ul>
+
+          <div id="profile-content"
+
+          <div class="profile-content-group">
+            <h3>Forças do Perfil</h3>
+            <div id="strengths-profile"></div>
           </div>
 
-          <div id="chartProfileS">
-            <span class="chartBarPercentage"></span>
-            <div class="chartBar"></div>
-            <p class="profileName">eStabilidade</p>
+          <div class="profile-content-group">
+            <h3>Motivadores do Perfil</h3>
+            <div id="motivators-profile"></div>
           </div>
 
-          <div id="chartProfileC">
-            <span class="chartBarPercentage"></span>
-            <div class="chartBar"></div>
-            <p class="profileName">Conformidade</p>
+          <div class="profile-content-group">
+            <h3>Pensamentos apoiadores</h3>
+            <div id="supportive-thoughts-profile"></div>
+          </div>
+
+          <div class="profile-content-group">
+            <h3>Pensamentos limitantes</h3>
+            <div id="limiting-thoughts-profile"></div>
+          </div>
+
+          <div class="profile-content-group">
+            <h3>Pontos para desenvolvimento</h3>
+            <div id="development-points-profile"></div>
           </div>
         </div>
-      </section>
 
-      <section id="resultTextProfile" hidden>
-        <h2 id="profileName"></h2>
+        <div id="result-profile-error" hidden>
+          <h3>Atenção — Perfil com Pouco Destaque</h3>
 
-        <h3>Possíveis pensamentos fortalecedores</h3>
-        <p id="positiveThink"></p>
+          <p>
+            Como nenhum perfil atingiu 30% ou mais, não é possível traçar um
+            perfil com destaque suficiente.
+          </p>
 
-        <h3>Possíveis pensamentos limitantes</h3>
-        <p id="negativeThink"></p>
+          <p>
+            Este tipo de resultado geralmente é ocasionado por:<br />
+            <span
+              >- respostas buscando mais valores ou idealizações do que
+              propriamente ações mais recentes;<br />
+              - um momento de muito estresse;<br />
+              - baixo autoconhecimento;</span
+            ><br />
+          </p>
 
-        <h3>Objetivos que potencializam seu perfil</h3>
-        <p id="objectives"></p>
-        <span
-          >Selecione 1 ou 2 objetivos para desenvolver nos próximos 12
-          meses.</span
-        >
-
-        <h3>Idéias para auxiliar o alcance de objetivos</h3>
-        <p id="insights"></p>
-      </section>
-
-      <section id="resultProfileError" hidden>
-        <h3>Atenção — Perfil com Pouco Destaque</h3>
-
-        <p>
-          Como nenhum perfil atingiu 30% ou mais, não é possível traçar um
-          perfil com destaque suficiente.
-        </p>
-
-        <p>
-          Este tipo de resultado geralmente é ocasionado por:<br />
-          <span
-            >- respostas buscando mais valores ou idealizações do que
-            propriamente ações mais recentes;<br />
-            - um momento de muito estresse;<br />
-            - baixo autoconhecimento;</span
-          ><br />
-        </p>
-
-        <p>
-          Recomendação:<br />
-          Refaça o teste com atenção às ações mais recentes e, em caso de
-          reincidência, peça para alguém próximo, que resposda pensando em como
-          você age no cotidiano.
-        </p>
+          <p>
+            Recomendação:<br />
+            Refaça o teste com atenção às ações mais recentes e, em caso de
+            reincidência, peça para alguém próximo, que resposda pensando em
+            como você age no cotidiano.
+          </p>
+        </div>
       </section>
     </main>
 
     <footer>
-      <p>Disclaimer</p>
+      <p>
+        Ferramenta educacional. Não substitui avaliação psicológica ou
+        instrumento profissional validado.
+      </p>
     </footer>
+    <script src="./js/questions.js"></script>
+    <script src="./js/script.js"></script>
   </body>
 </html>
