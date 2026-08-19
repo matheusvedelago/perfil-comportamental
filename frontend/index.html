@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
@@ -44,7 +45,7 @@
 
         <form id="assessment-form">
           <fieldset data-question-id="Q1">
-            <legend>Escolha a palavra ou expressão que melhor o define:</legend>
+            <legend>Escolha a palavra que melhor o define:</legend>
 
             <label>
               <input type="radio" name="current-question" value="A" />
@@ -74,25 +75,25 @@
           <h2>O seu perfil em números:</h2>
           <p id="result-message"></p>
           <div id="chart-area">
-            <div id="chart-profile-d">
+            <div id="profile-chart-d">
               <span class="chart-bar-percentage"></span>
               <div class="chart-bar"></div>
               <p class="profile-name">Dominância</p>
             </div>
 
-            <div id="chart-profile-i">
+            <div id="profile-chart-i">
               <span class="chart-bar-percentage"></span>
               <div class="chart-bar"></div>
               <p class="profile-name">Influência</p>
             </div>
 
-            <div id="chart-profile-s">
+            <div id="profile-chart-s">
               <span class="chart-bar-percentage"></span>
               <div class="chart-bar"></div>
               <p class="profile-name">Estabilidade</p>
             </div>
 
-            <div id="chart-profile-c">
+            <div id="profile-chart-c">
               <span class="chart-bar-percentage"></span>
               <div class="chart-bar"></div>
               <p class="profile-name">Conformidade</p>
@@ -103,43 +104,49 @@
         </div>
 
         <div id="profile-summary">
+          <h3>Nome do Perfil</h3>
           <h2 id="profile-name"></h2>
 
           <h3>Visão Geral</h3>
-          <p id="overview"></p>
+          <p id="profile-overview"></p>
 
-          <h3>Nota de Integração</h3>
+          <h3 id="integration-notes-title">Nota de Integração</h3>
           <ul id="integration-notes"></ul>
         </div>
 
         <div id="profile-content">
           <div class="profile-content-group">
             <h3>Forças do Perfil</h3>
-            <div id="strengths-profile"></div>
+            <div id="profile-strengths"></div>
           </div>
 
           <div class="profile-content-group">
             <h3>Motivadores do Perfil</h3>
-            <div id="motivators-profile"></div>
+            <div id="profile-motivators"></div>
           </div>
 
           <div class="profile-content-group">
-            <h3>Pensamentos apoiadores</h3>
-            <div id="supportive-thoughts-profile"></div>
+            <h3>Pensamentos Propulsores do Perfil</h3>
+            <div id="profile-supportive-thoughts"></div>
           </div>
 
           <div class="profile-content-group">
-            <h3>Pensamentos limitantes</h3>
-            <div id="limiting-thoughts-profile"></div>
+            <h3>Pensamentos Limitantes do Perfil</h3>
+            <div id="profile-limiting-thoughts"></div>
           </div>
 
           <div class="profile-content-group">
-            <h3>Pontos para desenvolvimento</h3>
-            <div id="development-points-profile"></div>
+            <h3>Pontos para Desenvolvimento do Perfil</h3>
+            <p>
+              ⚠️ De todos, escolha apenas 1 ou 2 pontos que com que mais se
+              identifica <span>→</span> Transforme-os em metas de
+              desenvolvimento para os próximos 6 a 12 meses.
+            </p>
+            <div id="profile-development-points"></div>
           </div>
         </div>
 
-        <div id="result-profile-error" hidden>
+        <div id="profile-result-error" hidden>
           <h3>Atenção — Perfil com Pouco Destaque</h3>
 
           <p>
@@ -168,10 +175,7 @@
     </main>
 
     <footer>
-      <p>
-        Ferramenta educacional. Não substitui avaliação psicológica ou
-        instrumento profissional validado.
-      </p>
+      <p>Ferramenta educacional. Não substitui avaliação psicológica.</p>
     </footer>
     <script src="./js/questions.js"></script>
     <script src="./js/script.js"></script>

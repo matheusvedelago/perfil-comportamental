@@ -1,13 +1,19 @@
 feito:
 
 - cálculo completo no backend
-- conteúdos por perfil preservados
-- resumo combinado com integrationNotes
+- seleção de perfis destacados por >= 30%
+- chave de perfil normalizada
+- summary por combinação
+- conteúdo separado por perfil
 - controller integrado ao calculator
-- POST válido retorna 200
-- entrada inválida retorna 400
-- commits enviados ao GitHub
+- POST válido testado com 200
+- entrada com quantidade inválida testada com 400
+
+testes:
+
+- caso feliz: 30 respostas
+- quantidade inválida: 29 respostas
 
 próximo MP:
 
-- conectar o frontend ao POST /api/assessment/calculate
+- conectar frontend ao POST /api/assessment/calculate

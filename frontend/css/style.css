@@ -1,0 +1,659 @@
+:root {
+  --background: #07111f;
+  --surface: #0d1b2a;
+  --surface-soft: #132238;
+  --surface-light: #edf3f8;
+  --border: #263b55;
+
+  --text: #f4f1ea;
+  --text-dark: #111827;
+  --text-muted: #aeb8c5;
+
+  --accent: #d4af67;
+  --focus: #7aa7d9;
+
+  --danger-background: #2a171b;
+  --danger-border: #7d3f49;
+
+  --radius-large: 24px;
+  --radius-medium: 14px;
+  --radius-small: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 16px;
+
+  background:
+    radial-gradient(circle at top, #102944 0, transparent 38%),
+    var(--background);
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  line-height: 1.6;
+}
+
+header,
+main,
+footer {
+  width: min(100%, 960px);
+  margin-inline: auto;
+}
+
+header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.08;
+}
+
+header .subtitle {
+  margin: 10px 0;
+  font-size: clamp(1.15rem, 3vw, 1.7rem);
+  font-weight: 500;
+}
+
+header span,
+#intro span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+header p {
+  color: var(--text-muted);
+}
+
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+h4 {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+p,
+ul {
+  margin-top: 0;
+}
+
+main > section {
+  padding: clamp(24px, 5vw, 44px);
+
+  background: linear-gradient(
+    145deg,
+    rgba(20, 41, 66, 0.96),
+    rgba(9, 25, 43, 0.96)
+  );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+button,
+label {
+  font: inherit;
+}
+
+/* =========================
+   INTRODUÇÃO
+   ========================= */
+
+#start-questionnaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 12px 22px;
+
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-medium);
+
+  background: var(--accent);
+  color: var(--text-dark);
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#start-questionnaire:hover {
+  filter: brightness(1.08);
+}
+
+#start-questionnaire:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* =========================
+   QUESTIONÁRIO
+   ========================= */
+
+#progress-text {
+  margin-bottom: 8px;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+
+  background: var(--surface-soft);
+
+  border-radius: 999px;
+}
+
+#progress-bar {
+  width: 0;
+  height: 100%;
+
+  background: linear-gradient(90deg, #4d78a6, var(--accent));
+
+  border-radius: inherit;
+
+  transition: width 0.3s ease;
+}
+
+#assessment-form fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  margin: 28px 0 0;
+  padding: 0;
+
+  border: 0;
+}
+
+#assessment-form legend {
+  grid-column: 1 / -1;
+
+  margin-bottom: 18px;
+
+  color: var(--text);
+
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  font-weight: 700;
+}
+
+#assessment-form label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 64px;
+  padding: 14px 18px;
+
+  background: var(--surface-light);
+  color: var(--text-dark);
+
+  border: 2px solid transparent;
+  border-radius: var(--radius-medium);
+
+  font-weight: 700;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#assessment-form label:hover {
+  background: #4d78a6;
+  color: white;
+
+  border-color: var(--focus);
+
+  transform: translateY(-1px);
+}
+
+#assessment-form input[type="radio"] {
+  position: absolute;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+#assessment-form label:has(input:checked) {
+  background: #315f8f;
+  color: var(--accent);
+  border-color: var(--accent);
+  cursor: wait;
+}
+
+#assessment-form label:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* =========================
+   RESULTADO
+   ========================= */
+
+#result {
+  display: grid;
+  gap: 28px;
+}
+
+#profile-result-chart,
+#profile-summary,
+#profile-content,
+#profile-result-error {
+  padding: clamp(20px, 4vw, 32px);
+
+  background: rgba(7, 17, 31, 0.38);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+}
+
+#result-message {
+  color: var(--text-muted);
+}
+
+#loading-message {
+  margin-top: 18px;
+
+  color: var(--accent);
+
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* =========================
+   GRÁFICO DISC
+   ========================= */
+
+#chart-area {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+
+  height: 290px;
+  margin-top: 34px;
+  margin-bottom: 42px;
+  padding: 0 22px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+/* Linha de referência visual em 30%. */
+#chart-area::after {
+  content: "";
+
+  position: absolute;
+  z-index: 1;
+
+  left: 22px;
+  right: 22px;
+  bottom: 30%;
+
+  border-top: 1px dashed rgba(212, 175, 103, 0.72);
+
+  pointer-events: none;
+}
+
+#profile-chart-d,
+#profile-chart-i,
+#profile-chart-s,
+#profile-chart-c {
+  --bar-height: 0%;
+
+  position: relative;
+
+  height: 100%;
+  min-width: 0;
+}
+
+.chart-bar {
+  position: absolute;
+  z-index: 2;
+
+  left: 50%;
+  bottom: 0;
+
+  width: min(72%, 82px);
+  height: var(--bar-height);
+  min-height: 2px;
+
+  transform: translateX(-50%);
+
+  border: 2px solid transparent;
+  border-radius: 11px 11px 0 0;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+
+  transition:
+    height 0.35s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chart-bar-percentage {
+  position: absolute;
+  z-index: 3;
+
+  left: 50%;
+  bottom: calc(var(--bar-height) + 5px);
+
+  transform: translateX(-50%);
+
+  color: var(--text);
+
+  font-size: 0.92rem;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.profile-name {
+  position: absolute;
+
+  left: 50%;
+  bottom: -32px;
+
+  width: 100%;
+  margin: 0;
+
+  transform: translateX(-50%);
+
+  color: var(--text-muted);
+
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Cores das barras */
+#profile-chart-d .chart-bar {
+  background: linear-gradient(to top, #a83f4c, #e87878);
+}
+
+#profile-chart-i .chart-bar {
+  background: linear-gradient(to top, #a9823f, #e2c476);
+}
+
+#profile-chart-s .chart-bar {
+  background: linear-gradient(to top, #3f795f, #79bc99);
+}
+
+#profile-chart-c .chart-bar {
+  background: linear-gradient(to top, #426a9a, #76a5d7);
+}
+
+/* Destaque dos perfis com 30% ou mais */
+.is-highlighted .chart-bar {
+  border-color: transparent;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.26);
+}
+
+.is-highlighted .chart-bar::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -8px;
+
+  border: 2px solid var(--accent);
+  border-radius: 14px 14px 0 0;
+
+  pointer-events: none;
+}
+
+.is-highlighted .chart-bar-percentage,
+.is-highlighted .profile-name {
+  color: var(--accent);
+}
+
+/* =========================
+   RESUMO
+   ========================= */
+
+#profile-name {
+  margin-bottom: 36px;
+
+  color: var(--accent);
+}
+
+#profile-overview {
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+
+#integration-notes {
+  padding-left: 22px;
+}
+
+#integration-notes li {
+  margin-bottom: 2px;
+  color: var(--text-muted);
+}
+
+/* =========================
+   CONTEÚDOS DOS PERFIS
+   ========================= */
+
+.profile-content-group + .profile-content-group {
+  margin-top: 32px;
+  padding-top: 28px;
+
+  border-top: 1px solid var(--border);
+}
+
+.profile-content-group > h3 {
+  margin-bottom: 8px;
+  color: var(--focus);
+}
+
+.profile-content-group > p {
+  max-width: 760px;
+  margin-bottom: 18px;
+
+  font-weight: 600;
+}
+
+.profile-content-group > p > span {
+  color: var(--accent);
+}
+
+#profile-strengths,
+#profile-motivators,
+#profile-supportive-thoughts,
+#profile-limiting-thoughts,
+#profile-development-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.profile-div {
+  min-width: 0;
+  padding: 18px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+}
+
+.profile-div ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.profile-div li {
+  margin-bottom: 2px;
+  line-height: 1.45;
+}
+
+.profile-div li:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   DESENVOLVIMENTO
+   ========================= */
+
+#profile-development-points li {
+  line-height: 1.6;
+}
+
+#profile-development-points li + li {
+  margin-top: 8px;
+}
+
+.limiting-behavior {
+  color: var(--text-muted);
+}
+
+.development-arrow {
+  padding: 0 4px;
+
+  color: var(--accent);
+
+  font-weight: 900;
+}
+
+.development-goal {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* =========================
+   RESULTADO SEM DESTAQUE
+   ========================= */
+
+#profile-result-error {
+  background: var(--danger-background);
+
+  border-color: var(--danger-border);
+}
+
+#profile-result-error h3 {
+  color: #f0b6bf;
+}
+
+#profile-result-error span {
+  color: var(--text-muted);
+}
+
+/* =========================
+   RODAPÉ
+   ========================= */
+
+footer p {
+  margin: 24px;
+
+  color: var(--text-muted);
+
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: center;
+
+  opacity: 0.6;
+}
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
+
+@media (max-width: 700px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  main > section {
+    padding: 22px 16px;
+  }
+
+  #assessment-form fieldset {
+    grid-template-columns: 1fr;
+  }
+
+  #assessment-form label {
+    min-height: 56px;
+  }
+
+  #chart-area {
+    gap: 8px;
+
+    height: 250px;
+    margin-bottom: 38px;
+    padding-inline: 6px;
+  }
+
+  #chart-area::after {
+    left: 6px;
+    right: 6px;
+  }
+
+  .chart-bar {
+    width: min(72%, 56px);
+  }
+
+  .chart-bar-percentage {
+    font-size: 0.78rem;
+  }
+
+  .profile-name {
+    font-size: 0.68rem;
+  }
+
+  #profile-strengths,
+  #profile-motivators,
+  #profile-supportive-thoughts,
+  #profile-limiting-thoughts,
+  #profile-development-points {
+    grid-template-columns: 1fr;
+  }
+}
