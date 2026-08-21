@@ -4,6 +4,12 @@ Questionário educacional de tendências comportamentais inspirado no modelo DIS
 
 > Ferramenta educacional. Não substitui avaliação psicológica ou instrumento profissional validado.
 
+## Testar o projeto
+
+Acesse:
+
+https://projetos.matheusvedelago.pt/disc
+
 ## Como funciona
 
 O usuário responde um questionário com 30 perguntas, escolhendo em cada uma a alternativa que mais se aproxima do seu comportamento.
@@ -23,6 +29,30 @@ O backend valida os dados, realiza o cálculo das tendências e retorna:
 - pontos de desenvolvimento.
 
 O frontend apresenta essas informações ao usuário junto com um gráfico dos percentuais.
+
+## Screenshots
+
+### Introdução
+
+![Tela de introdução](docs/screenshots/1-intro.png)
+
+### Questionário
+
+![Tela do questionário](docs/screenshots/2-questionnaire.png)
+
+### Resultado
+
+![Resultado - gráfico](docs/screenshots/3-result-1.png)
+
+![Resultado - resumo do perfil](docs/screenshots/3-result-2.png)
+
+![Resultado - forças e motivadores](docs/screenshots/3-result-3.png)
+
+![Resultado - pensamentos propulsores](docs/screenshots/3-result-4.png)
+
+![Resultado - pensamentos limitantes](docs/screenshots/3-result-5.png)
+
+![Resultado - pontos de desenvolvimento](docs/screenshots/3-result-6.png)
 
 ## Tecnologias
 
