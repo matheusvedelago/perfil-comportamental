@@ -194,4 +194,4 @@ Ao iniciar o questionário, o frontend envia uma requisição para `/health` par
 
 ## Status
 
-Versão 1 em processo de publicação.
+Versão 1 publicada e funcional.
