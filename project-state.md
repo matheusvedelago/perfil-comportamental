@@ -1,19 +1,53 @@
+dia:
+
+- concluído
+
+meta:
+
+- publicar a Versão 1 do questionário educacional de tendências comportamentais
+
 feito:
 
-- cálculo completo no backend
-- seleção de perfis destacados por >= 30%
-- chave de perfil normalizada
-- summary por combinação
-- conteúdo separado por perfil
-- controller integrado ao calculator
-- POST válido testado com 200
-- entrada com quantidade inválida testada com 400
+- frontend completo
+- backend completo
+- cálculo no backend
+- validação frontend e backend
+- integração via fetch
+- GET /health
+- tratamento de JSON inválido
+- loading e erros
+- resultado com gráfico
+- perfis predominantes e combinações
+- conteúdo dos perfis
+- responsividade básica
+- backend publicado no Render
+- frontend publicado
+- README atualizado
+- screenshots adicionados
+
+arquitetura:
+
+- frontend/
+- backend/
+- routes → controller → validator/calculator/data
+
+rotas:
+
+- GET /health
+- POST /api/assessment/calculate
 
 testes:
 
-- caso feliz: 30 respostas
-- quantidade inválida: 29 respostas
+- caso feliz
+- quantidade inválida
+- integração frontend → backend
+- backend publicado
+- frontend publicado
+
+bloqueio:
+
+- nenhum
 
 próximo MP:
 
-- conectar frontend ao POST /api/assessment/calculate
+- nenhum — Versão 1 concluída
