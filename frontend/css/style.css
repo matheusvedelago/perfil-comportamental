@@ -41,10 +41,8 @@ body {
 
   font-family:
     Inter,
-    system-ui,
     -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
+    Arial,
     sans-serif;
 
   line-height: 1.6;
@@ -131,9 +129,7 @@ label {
   font: inherit;
 }
 
-/* =========================
-   INTRODUÇÃO
-   ========================= */
+/* INTRODUÇÃO */
 
 #start-questionnaire {
   display: inline-flex;
@@ -162,9 +158,7 @@ label {
   outline-offset: 3px;
 }
 
-/* =========================
-   QUESTIONÁRIO
-   ========================= */
+/* QUESTIONÁRIO */
 
 #progress-text {
   margin-bottom: 8px;
@@ -273,9 +267,7 @@ label {
   outline-offset: 3px;
 }
 
-/* =========================
-   RESULTADO
-   ========================= */
+/* RESULTADO */
 
 #result {
   display: grid;
@@ -307,9 +299,7 @@ label {
   letter-spacing: 0.02em;
 }
 
-/* =========================
-   GRÁFICO DISC
-   ========================= */
+/* GRÁFICO */
 
 #chart-area {
   position: relative;
@@ -326,7 +316,6 @@ label {
   border-bottom: 1px solid var(--border);
 }
 
-/* Linha de referência visual em 30%. */
 #chart-area::after {
   content: "";
 
@@ -413,7 +402,6 @@ label {
   text-align: center;
 }
 
-/* Cores das barras */
 #profile-chart-d .chart-bar {
   background: linear-gradient(to top, #a83f4c, #e87878);
 }
@@ -430,7 +418,6 @@ label {
   background: linear-gradient(to top, #426a9a, #76a5d7);
 }
 
-/* Destaque dos perfis com 30% ou mais */
 .is-highlighted .chart-bar {
   border-color: transparent;
 
@@ -455,9 +442,7 @@ label {
   color: var(--accent);
 }
 
-/* =========================
-   RESUMO
-   ========================= */
+/* RESUMO */
 
 #profile-name {
   margin-bottom: 36px;
@@ -479,9 +464,7 @@ label {
   color: var(--text-muted);
 }
 
-/* =========================
-   CONTEÚDOS DOS PERFIS
-   ========================= */
+/* CONTEÚDOS DOS PERFIS */
 
 .profile-content-group + .profile-content-group {
   margin-top: 32px;
@@ -540,9 +523,7 @@ label {
   margin-bottom: 0;
 }
 
-/* =========================
-   DESENVOLVIMENTO
-   ========================= */
+/* DESENVOLVIMENTO */
 
 #profile-development-points li {
   line-height: 1.6;
@@ -569,9 +550,7 @@ label {
   font-weight: 600;
 }
 
-/* =========================
-   RESULTADO SEM DESTAQUE
-   ========================= */
+/* RESULTADO SEM DESTAQUE */
 
 #profile-result-error {
   background: var(--danger-background);
@@ -587,9 +566,7 @@ label {
   color: var(--text-muted);
 }
 
-/* =========================
-   RODAPÉ
-   ========================= */
+/* RODAPÉ */
 
 footer p {
   margin: 24px;
@@ -603,9 +580,7 @@ footer p {
   opacity: 0.6;
 }
 
-/* =========================
-   RESPONSIVIDADE
-   ========================= */
+/* RESPONSIVIDADE */
 
 @media (max-width: 700px) {
   body {
