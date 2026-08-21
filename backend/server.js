@@ -7,6 +7,7 @@ const allowedOrigins = [
   "http://127.0.0.1:5500",
   "https://projetos.matheusvedelago.pt",
   "https://matheusvedelago.pt",
+  "https://www.matheusvedelago.pt",
 ];
 const assessmentRoutes = require("./src/routes/assessmentRoutes");
 const systemRoutes = require("./src/routes/systemRoutes.js");
