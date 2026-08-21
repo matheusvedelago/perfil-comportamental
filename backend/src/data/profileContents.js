@@ -363,7 +363,7 @@ const profileContents = {
       },
       {
         limitingBehavior: "Ser arrogante quando contrariado",
-        developmentGoal: "Ouvir antes de contestar.",
+        developmentGoal: "Perguntar e ouvir antes de contestar.",
       },
       {
         limitingBehavior: "Ser demasiado duro consigo próprio",
