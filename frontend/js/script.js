@@ -31,12 +31,16 @@ const profileResultError = document.getElementById("profile-result-error");
 const resultMessage = document.getElementById("result-message");
 const loadingMessage = document.getElementById("loading-message");
 
-const apiBaseUrl = "http://localhost:3000";
+const apiBaseUrl = "https://rec1-perfil-comportamental.onrender.com";
 
 let currentQuestionIndex = 0;
 const answers = [];
 let isTransitioning = false;
 let isSubmitting = false;
+
+function wakeUpApi() {
+  fetch(`${apiBaseUrl}/health`).catch(function () {});
+}
 
 function resetResultContent() {
   integrationNotes.innerHTML = "";
@@ -112,6 +116,8 @@ function handleSelectedOptionChange() {
 const handleStartQuestionnaireClick = function () {
   introSection.hidden = true;
   questionnaireSection.hidden = false;
+
+  wakeUpApi();
 
   renderCurrentQuestion();
 };
@@ -210,7 +216,7 @@ function renderResult(responseData) {
     chartBar.style.height = `${percentage}%`;
 
     profileChart.style.setProperty("--bar-height", `${percentage}%`);
-    profileChart.classList.toggle("is-highlighted", percentage >= 30);
+    profileChart.classList.toggle("is-highlighted", isHighlighted);
   }
 
   if (responseProfileSummary !== null && responseProfileContent !== null) {

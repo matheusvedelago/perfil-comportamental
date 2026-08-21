@@ -23,6 +23,21 @@ app.use(
 app.use("/", systemRoutes);
 app.use("/api/assessment", assessmentRoutes);
 
+app.use(function (error, req, res, next) {
+  if (error instanceof SyntaxError && error.status === 400 && "body" in error) {
+    return res.status(400).json({
+      ok: false,
+      data: null,
+      error: {
+        code: "INVALID_JSON",
+        message: "O corpo da requisição contém um JSON inválido.",
+      },
+    });
+  }
+
+  next(error);
+});
+
 app.listen(PORT, function () {
   console.log("Servidor iniciado na porta: ", PORT);
 });
